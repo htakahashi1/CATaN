@@ -1,10 +1,15 @@
 # CATaN
-This repository includes some codes for CATaN.
 
-## How to start?
-1. Download the data directory and code directory.
-2. Install the necessary packages.
+This repository contains the code for CATaN.
 
-## How to use?
-If you would like to apply CATaN to bulk transcriptome data (ex. RNA-seq and microarray), use the codes in the bulk directory. If you would like to apply it to single cell RNA-seq data, use the codes in the scRNA-seq directory.
-Follow the numbers at the head of the jupyter notebook filenames (ex. **1**.code_name.ipynb).
+## Getting Started
+
+1. Download the data and code directories.
+2. Install the required packages.
+
+## Usage
+
+If you would like to apply CATaN to bulk RNA-seq data, you can either use the CATaN R package or the Jupyter Notebook code in the bulk directory. If you would like to apply it to single-cell RNA-seq data, use the code in the `scRNA-seq` directory.
+
+Follow the numbers at the beginning of each Jupyter Notebook filename (e.g., **1**.code_name.ipynb). If you would like to use the CATaN R package, please refer to the README in the `CATaN` directory.
+
