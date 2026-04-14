@@ -1,0 +1,46 @@
+Package: CATaN
+Type: Package
+Title: Canonical Correlation Analysis of TF-Binding and Transcriptome Networks
+Version: 0.99.0
+Authors@R: c(
+    person("Haruka", "Takahashi", role = c("aut", "cre"),
+           email = "harukatakahashi30@keio.jp",
+           comment = c(ORCID = "0000-0002-2025-4302")))
+Description: CATaN performs Canonical Correlation Analysis (CCA) between
+    transcription factor (TF) binding site matrices and transcriptome data
+    to identify shared regulatory axes (Canonical Components, CCs). CC scores
+    are then aligned to genomic SNP positions for use as annotations in
+    stratified LD Score Regression (S-LDSC). The package provides an end-to-end
+    pipeline from raw count data to sLDSC-ready annotation files.
+License: Artistic-2.0
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+biocViews: Genetics, GeneRegulation, Transcription, SNP,
+    FunctionalGenomics, Transcriptomics
+Depends:
+    R (>= 4.3.0)
+Imports:
+    methods,
+    stats,
+    utils,
+    GenomicRanges,
+    IRanges,
+    S4Vectors,
+    GenomeInfoDb,
+    BiocGenerics,
+    rtracklayer,
+    BiocParallel,
+    BiocFileCache,
+    edgeR
+Suggests:
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown,
+    BiocStyle,
+    ggplot2,
+    SummarizedExperiment
+Config/testthat/edition: 3
+VignetteBuilder: knitr
+URL: https://github.com/placeholder/CATaN
+BugReports: https://github.com/placeholder/CATaN/issues

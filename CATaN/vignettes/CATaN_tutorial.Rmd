@@ -1,0 +1,224 @@
+---
+title: "CATaN: Canonical Correlation Analysis of TF-Binding and Transcriptome Networks"
+author:
+  - name: Haruka Takahashi, Hiroaki Hatano
+package: CATaN
+output:
+  BiocStyle::html_document:
+    toc: true
+    toc_depth: 3
+vignette: >
+  %\VignetteIndexEntry{CATaN Tutorial}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+    echo = TRUE,
+    message = TRUE,
+    warning = FALSE,
+    collapse = TRUE,
+    comment = "#>"
+)
+```
+
+# Introduction
+
+**CATaN** (Canonical Correlation Analysis of TF-binding and Transcriptome
+Networks) identifies shared regulatory axes between transcription factor (TF)
+binding patterns and transcriptome profiles. The resulting Canonical Component
+(CC) scores are mapped to genomic SNP positions, producing annotation files
+suitable for stratified LD Score Regression (S-LDSC).
+
+## Workflow overview
+
+1. **Filter and normalise** RNA-seq count data
+2. **Run CCA** between a TF-gene binding matrix and the transcriptome
+3. **Align CC scores to SNPs** using TF ChIP-seq peak coordinates
+4. **Extract top/bottom SNPs** and export for S-LDSC
+
+# Quick start
+
+```{r load-library}
+library(CATaN)
+```
+
+## Step 1: Prepare input data
+
+CATaN requires two matrices with shared gene identifiers as row names:
+
+- **TF-gene binding matrix**: binary matrix (gene × TF) indicating whether
+  each TF has a binding site near each gene.
+- **RNA-seq count matrix**: raw counts (gene × sample).
+
+```{r download-data, eval=FALSE}
+## Download TF-gene binding matrix from Zenodo
+tf_matrix <- download_tf_matrix("~/catan_data")
+tf_matrix <- as.matrix(tf_matrix)
+```
+
+For this tutorial we use simulated RNA-seq data:
+
+```{r simulate-data}
+set.seed(42)
+ngenes <- 500
+ntf    <- 30
+nsamp  <- 50
+
+## Simulated TF-gene binding matrix
+tf_matrix <- matrix(sample(0:1, ngenes * ntf, replace = TRUE,
+                           prob = c(0.7, 0.3)),
+                    nrow = ngenes, ncol = ntf)
+rownames(tf_matrix) <- paste0("ENSG", sprintf("%05d", seq_len(ngenes)))
+colnames(tf_matrix) <- paste0("TF", seq_len(ntf))
+
+## Simulated RNA-seq counts
+counts <- matrix(rnbinom(ngenes * nsamp, mu = 50, size = 2),
+                 nrow = ngenes, ncol = nsamp)
+rownames(counts) <- paste0("ENSG", sprintf("%05d", seq_len(ngenes)))
+colnames(counts) <- paste0("sample", seq_len(nsamp))
+```
+
+## Step 2: Filter low-expression genes
+
+```{r filter}
+filtered_counts <- filter_low_expression(counts)
+```
+
+## Step 3: Prepare matrices
+
+Find common genes between the count data and TF matrix, and perform TMM
+normalisation:
+
+```{r prepare}
+mats <- prepare_matrices(filtered_counts, tf_matrix)
+names(mats)
+dim(mats$tf)
+dim(mats$expr)
+```
+
+## Step 4: Run CCA
+
+```{r run-cca}
+cca_result <- run_cca(
+    tf_matrix     = mats$tf,
+    transcriptome = mats$expr,
+    n_cc          = 10L,
+    n_hvg         = 10000L
+)
+cca_result
+```
+
+## Step 5: Inspect results
+
+### CCA parameters
+
+```{r parameters}
+ccParameters(cca_result)
+```
+
+### tfsampleLoading
+
+```{r tfsampleLoading}
+head(tfsampleLoading(cca_result))
+```
+
+### Visualisation
+
+```{r plot-cc, fig.width=6, fig.height=5}
+if (requireNamespace("ggplot2", quietly = TRUE)) {
+    plotCC(cca_result, cc_x = 1, cc_y = 2, space = "tf")
+}
+```
+
+# SNP annotation for S-LDSC
+
+After CCA, CC scores are mapped to genomic SNP positions using TF ChIP-seq
+peak BED files. This section describes the workflow; it requires external
+data files not included in this vignette.
+
+## Download reference data
+
+```{r download-data, eval=FALSE}
+## Download TF peak BED files from Zenodo (first time only, ~1 GB)
+peak_dir <- download_peak_beds("~/catan_data/peaks")
+```
+
+## Prepare SNP coordinates
+
+Target SNPs should be provided as a `GRanges` object. For users with
+1000 Genomes Phase 3 `.bim` files, a convenience function is provided:
+
+```{r bim-example, eval=FALSE}
+## Convert .bim file to GRanges
+snp_gr <- bim_to_granges("path/to/1000G.EUR.QC.22.bim")
+snp_gr
+
+## Or combine all chromosomes
+bim_files <- list.files("path/to/bim_dir", pattern = "\\.bim$",
+                        full.names = TRUE)
+snp_list <- lapply(bim_files, bim_to_granges)
+snp_gr <- do.call(c, snp_list)
+```
+
+## Align CC scores to SNPs
+
+```{r align-example, eval=FALSE}
+library(BiocParallel)
+
+annot <- align_cc_to_snps(
+    catan_result = cca_result,
+    peak_dir     = peak_dir,
+    snp_gr       = snp_gr,
+    chromosomes  = paste0("chr", 1:22),
+    BPPARAM      = MulticoreParam(4)  # 4 cores
+)
+```
+
+## Extract top/bottom SNPs and export
+
+```{r export-example, eval=FALSE}
+## Extract top and bottom 10% of SNPs by CC score
+annot <- extract_top_bottom_snps(annot, percentile = 0.1)
+
+## Export as sLDSC-ready BED files
+export_for_sldsc(annot, output_dir = "sldsc_annotations/", prefix = "CATaN")
+```
+
+Output files:
+
+```
+sldsc_annotations/
+├── CATaN_CC1_rotation_top.bed.gz
+├── CATaN_CC1_rotation_bottom.bed.gz
+├── CATaN_CC2_rotation_top.bed.gz
+├── CATaN_CC2_rotation_bottom.bed.gz
+└── ...
+```
+
+These files can be used directly as annotations in `ldsc.py`.
+
+# End-to-end wrapper
+
+For convenience, `run_catan()` executes the entire pipeline:
+
+```{r wrapper-example, eval=FALSE}
+result <- run_catan(
+    counts      = counts,
+    tf_matrix   = tf_matrix,
+    peak_dir    = peak_dir,
+    snp_gr      = snp_gr,
+    n_cc        = 10L,
+    n_hvg       = 10000L,
+    percentile  = 0.1,
+    output_dir  = "sldsc_output/",
+    BPPARAM     = MulticoreParam(4)
+)
+```
+
+# Session information
+
+```{r session-info}
+sessionInfo()
+```
