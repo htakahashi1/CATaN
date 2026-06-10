@@ -4,7 +4,6 @@ Title: Canonical Correlation Analysis of TF-Binding and Transcriptome Networks
 Version: 0.99.0
 Authors@R: c(
     person("Haruka", "Takahashi", role = c("aut", "cre"),
-           email = "harukatakahashi30@keio.jp",
            comment = c(ORCID = "0000-0002-2025-4302")))
 Description: CATaN performs Canonical Correlation Analysis (CCA) between
     a transcription factor (TF)-gene regulatory network matrix and transcriptome data
