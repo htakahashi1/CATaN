@@ -3,13 +3,13 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-**C**anonical Correlation **A**nalysis of **T**F-Binding **a**nd
-Transcriptome **N**etworks
+**C**anonical Correlation **A**nalysis of **T**ranscriptome **a**nd
+TF-gene regulatory **N**etworks
 
 ## Overview
 
 CATaN performs Canonical Correlation Analysis (CCA) between transcription
-factor (TF) binding site matrices and transcriptome data to identify shared
+factor (TF) gene-regulatory networks matrix (TF-GRN) and transcriptome data to identify shared
 regulatory axes (Canonical Components). CC scores are then aligned to genomic
 SNP positions for use as annotations in stratified LD Score Regression
 (S-LDSC).
@@ -17,13 +17,8 @@ SNP positions for use as annotations in stratified LD Score Regression
 ## Installation
 
 ```r
-# Install from Bioconductor (when available)
-if (!require("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
-BiocManager::install("CATaN")
-
 # Install development version from GitHub
-BiocManager::install("placeholder/CATaN")
+BiocManager::install("htakahashi1/CATaN")
 ```
 
 ## Quick start
