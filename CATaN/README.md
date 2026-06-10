@@ -50,4 +50,4 @@ See `vignette("CATaN_tutorial")` for a full walkthrough.
 
 If you use CATaN in your research, please cite:
 
-> [Paper reference to be added]
+> <Preparing>
