@@ -7,11 +7,11 @@ Authors@R: c(
            email = "harukatakahashi30@keio.jp",
            comment = c(ORCID = "0000-0002-2025-4302")))
 Description: CATaN performs Canonical Correlation Analysis (CCA) between
-    transcription factor (TF) binding site matrices and transcriptome data
+    a transcription factor (TF)-gene regulatory network matrix and transcriptome data
     to identify shared regulatory axes (Canonical Components, CCs). CC scores
     are then aligned to genomic SNP positions for use as annotations in
     stratified LD Score Regression (S-LDSC). The package provides an end-to-end
-    pipeline from raw count data to sLDSC-ready annotation files.
+    pipeline from raw count data to S-LDSC-ready annotation files.
 License: Artistic-2.0
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
