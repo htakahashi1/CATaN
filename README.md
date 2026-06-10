@@ -1,6 +1,6 @@
 # CATaN
 
-This repository contains the code for CATaN.
+This repository contains the code for Canonical correlation Analysis of Transcriptome and TF-gene regulatory Networks (CATaN).
 
 ## Getting Started
 
