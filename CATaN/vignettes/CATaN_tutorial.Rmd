@@ -137,7 +137,7 @@ data files not included in this vignette.
 
 ## Download reference data
 
-```{r download-data, eval=FALSE}
+```{r download-peaks, eval=FALSE}
 ## Download TF peak BED files from Zenodo (first time only, ~1 GB)
 peak_dir <- download_peak_beds("~/catan_data/peaks")
 ```
