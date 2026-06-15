@@ -4,8 +4,6 @@ author:
   - name: Haruka Takahashi, Hiroaki Hatano
 package: CATaN
 output: rmarkdown::html_document
-    toc: true
-    toc_depth: 3
 vignette: >
   %\VignetteIndexEntry{CATaN Tutorial}
   %\VignetteEngine{knitr::rmarkdown}
