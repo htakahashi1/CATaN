@@ -18,6 +18,7 @@ SNP positions for use as annotations in stratified LD Score Regression
 
 ```r
 # Install development version from GitHub
+install.packages("BiocManager")
 BiocManager::install("htakahashi1/CATaN")
 ```
 
