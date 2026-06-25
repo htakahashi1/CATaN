@@ -11,7 +11,7 @@ TF-gene regulatory **N**etworks
 CATaN performs Canonical Correlation Analysis (CCA) between transcription
 factor (TF) gene-regulatory networks matrix (TF-GRN) and transcriptome data to identify shared
 regulatory axes (Canonical Components). CC scores are then aligned to genomic
-SNP positions for use as annotations in stratified LD Score Regression
+SNP positions to make binary annotations for stratified LD Score Regression
 (S-LDSC).
 
 ## Installation
