@@ -2,7 +2,7 @@
 % Please edit documentation in R/run_cca.R
 \name{run_cca}
 \alias{run_cca}
-\title{Run Canonical Correlation Analysis of TF-binding and transcriptome data}
+\title{Run Canonical Correlation Analysis of TF-GRN matrix and transcriptome data}
 \usage{
 run_cca(
   tf_matrix,
@@ -14,7 +14,7 @@ run_cca(
 )
 }
 \arguments{
-\item{tf_matrix}{Numeric matrix of TF-gene binding associations
+\item{tf_matrix}{Numeric matrix of TF-gene connectivity scores
 (gene x TF). Typically from \code{\link{prepare_matrices}}.}
 
 \item{transcriptome}{Numeric matrix of normalised expression values
@@ -37,10 +37,9 @@ column names of \code{transcriptome}.}
 A \code{\linkS4class{CATaNResult}} object.
 }
 \description{
-Performs CCA between a TF-gene binding matrix (X) and a transcriptome
+Performs CCA between a TF-GRN matrix (X) and a transcriptome
 matrix (Y) via SVD of the cross-product matrix X'Y. Returns a
-\code{\linkS4class{CATaNResult}} object containing canonical component
-weights and summary parameters.
+\code{\linkS4class{CATaNResult}} object containing CC sample loadings and summary parameters.
 }
 \details{
 The analysis proceeds as follows:
@@ -54,10 +53,10 @@ across the selected genes are removed.
 normalised first across genes (row-wise) then across features
 (column-wise). Genes producing NA (zero variance) are removed.
 \item \strong{SVD}: The cross-product matrix \eqn{X^T Y} is computed
-and decomposed via SVD. The left singular vectors (U) give TF weights
-and the right singular vectors (V) give sample weights for each CC.
-\item \strong{Parameter computation}: Variance explained, Squared
-Canonical Fraction (SCF), and canonical correlations are computed.
+and decomposed via SVD. The left singular vectors (U) give TF sample loadings
+and the right singular vectors (V) give transcriptome sample loadings for each CC.
+\item \strong{Parameter computation}: Variance
+explained, singular value proportions, SCF, and canonical correlations are computed.
 }
 }
 \examples{

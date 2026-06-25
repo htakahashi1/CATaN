@@ -1,8 +1,8 @@
 #' Align CC scores to SNP positions
 #'
-#' Maps TF-level CC scores from a CATaNResult to genomic SNP positions using
+#' Maps TF sample loadings from a CATaNResult to genomic SNP positions using
 #' TF ChIP-seq peak BED files. For each CC, every TF's peak regions are
-#' assigned that TF's CC weight, overlapped with the target SNP set, and
+#' assigned that TF's sample loadings, overlapped with the target SNP set, and
 #' aggregated by summing scores at each SNP. SNPs not overlapping any peak
 #' receive a score of zero.
 #'
@@ -59,7 +59,7 @@
 #' @details
 #' The algorithm proceeds per CC, per chromosome:
 #' \enumerate{
-#'   \item Load each TF's peak BED file and assign that TF's CC weight as
+#'   \item Load each TF's peak BED file and assign that TF sample loading as
 #'     the score.
 #'   \item Combine all TF peaks and find overlaps with the target SNP set
 #'     (equivalent to \code{bedtools intersect}).

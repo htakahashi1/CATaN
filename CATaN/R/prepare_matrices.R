@@ -1,12 +1,12 @@
 #' Prepare TF and transcriptome matrices for CCA
 #'
-#' Takes a filtered count matrix and a TF-gene binding matrix, finds the
+#' Takes a filtered count matrix and a TF-GRN matrix, finds the
 #' intersection of genes, removes duplicates, and performs TMM normalisation
 #' followed by log2(CPM + 1) transformation on the transcriptome data.
 #'
 #' @param counts A numeric matrix of filtered raw counts (genes x samples),
 #'   typically the output of \code{\link{filter_low_expression}}.
-#' @param tf_matrix A numeric matrix of TF-gene binding associations
+#' @param tf_matrix A numeric matrix of TF-gene connectivity scores
 #'   (genes x TFs). Row names must be gene identifiers matching those in
 #'   \code{counts}.
 #' @param norm_method Character. Normalisation method passed to

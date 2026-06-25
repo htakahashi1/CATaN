@@ -1,4 +1,4 @@
-#' Export CATaN annotations as sLDSC-ready BED files
+#' Export CC annotations as S-LDSC-ready BED files
 #'
 #' Writes top and bottom SNP sets for each CC as gzipped BED files
 #' suitable for use as annotations in stratified LD Score Regression.

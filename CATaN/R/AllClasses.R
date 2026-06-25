@@ -1,20 +1,20 @@
 #' @title CATaNResult class
 #'
-#' @description S4 class to store results from CCA of TF-binding and
+#' @description S4 class to store results from CCA of TF-GRN and
 #'   transcriptome matrices. This is the output of \code{\link{run_cca}} and
 #'   serves as input to \code{\link{align_cc_to_snps}}.
 #'
-#' @slot tf_matrix Filtered TF binding matrix (gene x TF) used in CCA.
+#' @slot tf_matrix Filtered TF-GRN matrix (gene x TF) used in CCA.
 #' @slot transcriptome Filtered and normalised logCPM matrix (gene x sample)
 #'   used in CCA.
 #' @slot hvg Character vector of highly variable gene names selected for CCA.
 #' @slot svd_result List containing the raw SVD output (\code{u}, \code{d},
 #'   \code{v}).
 #' @slot n_cc Integer, the number of canonical components retained.
-#' @slot tf_sample_loading DataFrame of TF weights (U matrix), TF x CC.
-#' @slot transcriptome_sample_loading DataFrame of sample weights (V matrix), sample x CC.
+#' @slot tf_sample_loading DataFrame of TF sample loadings (u matrix), TF x CC.
+#' @slot transcriptome_sample_loading DataFrame of transcriptome sample loadings (v matrix), sample x CC.
 #' @slot parameters DataFrame of CCA summary parameters including variance
-#'   explained, SCF, and canonical correlations.
+#'   explained, singular value proportions, SCF, and canonical correlations.
 #' @slot sample_metadata DataFrame of sample annotations (optional).
 #' @slot call The matched call used to produce this object.
 #'
@@ -88,7 +88,7 @@ setClass("CATaNResult",
 
 #' @title CATaNAnnotation class
 #'
-#' @description S4 class to store SNP-level CC score annotations for sLDSC.
+#' @description S4 class to store SNP-level CC score annotations for S-LDSC.
 #'   This is the output of \code{\link{align_cc_to_snps}} and
 #'   \code{\link{extract_top_bottom_snps}}.
 #'

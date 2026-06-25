@@ -23,7 +23,7 @@ run_catan(
 \item{counts}{Numeric matrix of raw counts (gene x sample) or a
 SummarizedExperiment.}
 
-\item{tf_matrix}{Numeric matrix of TF-gene binding (gene x TF).}
+\item{tf_matrix}{Numeric matrix of TF-GRN (gene x TF).}
 
 \item{peak_dir}{Character. Path to TF peak BED directory. If NULL,
 \code{\link{download_peak_beds}} is called automatically.}
@@ -40,7 +40,7 @@ SummarizedExperiment.}
 
 \item{population}{Character (default "custom").}
 
-\item{output_dir}{Character. If non-NULL, export sLDSC files here.}
+\item{output_dir}{Character. If non-NULL, export S-LDSC files here.}
 
 \item{BPPARAM}{BiocParallelParam (default bpparam()).}
 
@@ -51,7 +51,7 @@ A \code{\linkS4class{CATaNAnnotation}} object.
 }
 \description{
 End-to-end wrapper that runs CCA, aligns CC scores to SNPs, extracts
-top/bottom SNPs, and optionally exports sLDSC-ready files.
+top/bottom SNPs, and optionally exports S-LDSC-ready files.
 }
 \examples{
 set.seed(1)

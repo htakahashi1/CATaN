@@ -19,9 +19,8 @@ A \code{\linkS4class{CATaNAnnotation}} object with the
 \code{top_snps} and \code{bottom_snps} slots populated.
 }
 \description{
-For each CC in a CATaNAnnotation object, extracts the SNPs with the
-highest and lowest CC scores. By default, the top and bottom 10\%\% of
-SNPs are extracted, matching the original CATaN pipeline.
+For each CC in a CATaNAnnotation object, the top and bottom 10\% of
+SNPs are extracted.
 }
 \details{
 For each CC, SNPs are sorted by their aggregated CC score. The top

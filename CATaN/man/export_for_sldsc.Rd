@@ -2,7 +2,7 @@
 % Please edit documentation in R/export_for_sldsc.R
 \name{export_for_sldsc}
 \alias{export_for_sldsc}
-\title{Export CATaN annotations as sLDSC-ready BED files}
+\title{Export CC annotations as S-LDSC-ready BED files}
 \usage{
 export_for_sldsc(annotation, output_dir, prefix = "CATaN")
 }

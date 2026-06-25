@@ -13,14 +13,14 @@ Prints a summary of the object to the console
 (invisibly returns NULL).
 }
 \description{
-S4 class to store results from CCA of TF-binding and
+S4 class to store results from CCA of TF-GRN and
 transcriptome matrices. This is the output of \code{\link{run_cca}} and
 serves as input to \code{\link{align_cc_to_snps}}.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{tf_matrix}}{Filtered TF binding matrix (gene x TF) used in CCA.}
+\item{\code{tf_matrix}}{Filtered TF-GRN matrix (gene x TF) used in CCA.}
 
 \item{\code{transcriptome}}{Filtered and normalised logCPM matrix (gene x sample)
 used in CCA.}
@@ -32,12 +32,12 @@ used in CCA.}
 
 \item{\code{n_cc}}{Integer, the number of canonical components retained.}
 
-\item{\code{tf_sample_loading}}{DataFrame of TF weights (U matrix), TF x CC.}
+\item{\code{tf_sample_loading}}{DataFrame of TF sample loadings (u matrix), TF x CC.}
 
-\item{\code{transcriptome_sample_loading}}{DataFrame of sample weights (V matrix), sample x CC.}
+\item{\code{transcriptome_sample_loading}}{DataFrame of transcriptome sample loadings (v matrix), sample x CC.}
 
 \item{\code{parameters}}{DataFrame of CCA summary parameters including variance
-explained, SCF, and canonical correlations.}
+explained, singular value proportions, SCF, and canonical correlations.}
 
 \item{\code{sample_metadata}}{DataFrame of sample annotations (optional).}
 

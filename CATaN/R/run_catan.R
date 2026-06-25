@@ -1,11 +1,11 @@
 #' Run the full CATaN pipeline
 #'
 #' End-to-end wrapper that runs CCA, aligns CC scores to SNPs, extracts
-#' top/bottom SNPs, and optionally exports sLDSC-ready files.
+#' top/bottom SNPs, and optionally exports S-LDSC-ready files.
 #'
 #' @param counts Numeric matrix of raw counts (gene x sample) or a
 #'   SummarizedExperiment.
-#' @param tf_matrix Numeric matrix of TF-gene binding (gene x TF).
+#' @param tf_matrix Numeric matrix of TF-GRN (gene x TF).
 #' @param peak_dir Character. Path to TF peak BED directory. If NULL,
 #'   \code{\link{download_peak_beds}} is called automatically.
 #' @param snp_gr GRanges of target SNP positions.
@@ -14,7 +14,7 @@
 #' @param n_hvg Integer. Number of HVGs (default 10000L).
 #' @param percentile Numeric. Top/bottom fraction (default 0.1).
 #' @param population Character (default "custom").
-#' @param output_dir Character. If non-NULL, export sLDSC files here.
+#' @param output_dir Character. If non-NULL, export S-LDSC files here.
 #' @param BPPARAM BiocParallelParam (default bpparam()).
 #' @param verbose Logical (default TRUE).
 #'

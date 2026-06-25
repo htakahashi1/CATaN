@@ -4,9 +4,9 @@
 \name{CATaN-package}
 \alias{CATaN}
 \alias{CATaN-package}
-\title{CATaN: Canonical Correlation Analysis of TF-Binding and Transcriptome Networks}
+\title{CATaN: Canonical correlation Analysis of Transcriptome and TF-gene regulatory Networks (CATaN)}
 \description{
-CATaN performs Canonical Correlation Analysis (CCA) between transcription factor (TF) binding site matrices and transcriptome data to identify shared regulatory axes (Canonical Components, CCs). CC scores are then aligned to genomic SNP positions for use as annotations in stratified LD Score Regression (S-LDSC). The package provides an end-to-end pipeline from raw count data to sLDSC-ready annotation files.
+CATaN performs Canonical Correlation Analysis (CCA) between a transcription factor (TF)-gene regulatory network matrix and transcriptome data to identify shared regulatory axes (Canonical Components, CCs). CC scores are then aligned to genomic SNP positions to make binary annotations for stratified LD Score Regression (S-LDSC). The package provides an end-to-end pipeline from raw count data to S-LDSC-ready annotation files.
 }
 \examples{
 # See vignette("CATaN_tutorial") for full usage
@@ -15,13 +15,18 @@ library(CATaN)
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/placeholder/CATaN}
-  \item Report bugs at \url{https://github.com/placeholder/CATaN/issues}
+  \item \url{https://github.com/htakahashi1/CATaN}
+  \item Report bugs at \url{https://github.com/htakahashi1/CATaN/issues}
 }
 
 }
 \author{
 \strong{Maintainer}: Haruka Takahashi \email{harukatakahashi30@keio.jp} (\href{https://orcid.org/0000-0002-2025-4302}{ORCID})
+
+Authors:
+\itemize{
+  \item Haruka Takahashi \email{harukatakahashi30@keio.jp} (\href{https://orcid.org/0000-0002-2025-4302}{ORCID})
+}
 
 }
 \keyword{internal}

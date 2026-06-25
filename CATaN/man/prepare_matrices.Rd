@@ -10,7 +10,7 @@ prepare_matrices(counts, tf_matrix, norm_method = "TMM", verbose = TRUE)
 \item{counts}{A numeric matrix of filtered raw counts (genes x samples),
 typically the output of \code{\link{filter_low_expression}}.}
 
-\item{tf_matrix}{A numeric matrix of TF-gene binding associations
+\item{tf_matrix}{A numeric matrix of TF-gene connectivity scores
 (genes x TFs). Row names must be gene identifiers matching those in
 \code{counts}.}
 
@@ -29,7 +29,7 @@ intersecting genes (gene x sample).}
 }
 }
 \description{
-Takes a filtered count matrix and a TF-gene binding matrix, finds the
+Takes a filtered count matrix and a TF-GRN matrix, finds the
 intersection of genes, removes duplicates, and performs TMM normalisation
 followed by log2(CPM + 1) transformation on the transcriptome data.
 }

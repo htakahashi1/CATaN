@@ -1,8 +1,7 @@
 #' Extract top and bottom percentile SNPs by CC score
 #'
-#' For each CC in a CATaNAnnotation object, extracts the SNPs with the
-#' highest and lowest CC scores. By default, the top and bottom 10%% of
-#' SNPs are extracted, matching the original CATaN pipeline.
+#' For each CC in a CATaNAnnotation object, the top and bottom 10% of
+#' SNPs are extracted.
 #'
 #' @param annotation A \code{\linkS4class{CATaNAnnotation}} object with
 #'   the \code{snp_scores} slot populated (output of

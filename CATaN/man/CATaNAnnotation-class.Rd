@@ -13,7 +13,7 @@ Prints a summary of the object to the console
 (invisibly returns NULL).
 }
 \description{
-S4 class to store SNP-level CC score annotations for sLDSC.
+S4 class to store SNP-level CC score annotations for S-LDSC.
 This is the output of \code{\link{align_cc_to_snps}} and
 \code{\link{extract_top_bottom_snps}}.
 }

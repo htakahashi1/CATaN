@@ -2,14 +2,14 @@
 
 ## ---- Default URLs (update after Zenodo upload) ----
 
-## TODO: Replace with actual Zenodo URLs after data upload
+
 .CATAN_ZENODO_PEAK_URL <- paste0(
-    "https://zenodo.org/records/XXXXXXX/files/",
-    "CATaN_TF_peak_beds_hg19.tar.gz"
+    "https://zenodo.org/records/19507630/files/",
+    "TF_ChIPseq_bed_hg19.tar.gz"
 )
 .CATAN_ZENODO_MATRIX_URL <- paste0(
-    "https://zenodo.org/records/XXXXXXX/files/",
-    "TF_gene_flag_matrix.txt.gz"
+    "https://zenodo.org/records/19507630/files/",
+    "TF_GRN_matrix.txt"
 )
 
 
@@ -52,20 +52,13 @@ download_peak_beds <- function(dest_dir,
         url <- .CATAN_ZENODO_PEAK_URL
     }
 
-    ## Validate URL is set
-    if (grepl("XXXXXXX", url)) {
-        stop("Zenodo URL has not been configured yet.\n",
-             "Please provide the url argument, or update ",
-             "the package after data upload to Zenodo.\n",
-             "See vignette('zenodo-upload', package='CATaN')")
-    }
 
     if (!dir.exists(dest_dir)) {
         dir.create(dest_dir, recursive = TRUE)
     }
 
     ## Download (with cache)
-    archive_path <- .cached_download(url, "CATaN_TF_peak_beds_hg19.tar.gz",
+    archive_path <- .cached_download(url, "TF_ChIPseq_bed_hg19.tar.gz",
                                      cache = cache, verbose = verbose)
 
     ## Extract
@@ -115,34 +108,23 @@ download_tf_matrix <- function(dest_dir,
         url <- .CATAN_ZENODO_MATRIX_URL
     }
 
-    if (grepl("XXXXXXX", url)) {
-        stop("Zenodo URL has not been configured yet.\n",
-             "Please provide the url argument, or update ",
-             "the package after data upload to Zenodo.\n",
-             "See vignette('zenodo-upload', package='CATaN')")
-    }
+
 
     if (!dir.exists(dest_dir)) {
         dir.create(dest_dir, recursive = TRUE)
     }
 
     ## Download (with cache)
-    gz_path <- .cached_download(url, "TF_gene_flag_matrix.txt.gz",
+    gz_path <- .cached_download(url, "TF_GRN_matrix.txt",
                                 cache = cache, verbose = verbose)
 
-    ## Decompress to dest_dir
-    out_path <- file.path(dest_dir, "TF_gene_flag_matrix.txt")
+    ## Copy to dest_dir
+    out_path <- file.path(dest_dir, "TF_GRN_matrix.txt")
     if (!file.exists(out_path)) {
-        if (verbose) message("Decompressing to ", out_path, "...")
-        con_in  <- gzfile(gz_path, "rb")
-        con_out <- file(out_path, "wb")
-        while (length(chunk <- readBin(con_in, "raw", n = 1e6)) > 0) {
-            writeBin(chunk, con_out)
-        }
-        close(con_in)
-        close(con_out)
+      if (verbose) message("Copying to ", out_path, "...")
+      file.copy(gz_path, out_path)
     } else if (verbose) {
-        message("TF matrix already exists at ", out_path)
+      message("TF matrix already exists at ", out_path)
     }
 
     out_path
@@ -206,8 +188,8 @@ catan_data_status <- function() {
     bfc <- BiocFileCache::BiocFileCache(ask = FALSE)
 
     files <- c(
-        peaks  = "CATaN_TF_peak_beds_hg19.tar.gz",
-        matrix = "TF_gene_flag_matrix.txt.gz"
+        peaks  = "TF_ChIPseq_bed_hg19.tar.gz",
+        matrix = "TF_GRN_matrix.txt"
     )
 
     status <- data.frame(
