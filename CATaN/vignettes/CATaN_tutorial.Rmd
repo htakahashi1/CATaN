@@ -1,7 +1,7 @@
 ---
-title: "CATaN: Canonical Correlation Analysis of TF-Binding and Transcriptome Networks"
+title: "CATaN: Canonical correlation Analysis of Transcriptome and TF-gene regulatory Networks"
 author:
-  - name: Haruka Takahashi, Hiroaki Hatano
+  - name: Haruka Takahashi, Hiroaki Hatano, Kazuyoshi Ishigaki
 package: CATaN
 output: rmarkdown::html_document
 vignette: >
@@ -22,8 +22,7 @@ knitr::opts_chunk$set(
 
 # Introduction
 
-**CATaN** (Canonical Correlation Analysis of TF-binding and Transcriptome
-Networks) identifies shared regulatory axes between transcription factor (TF)
+**CATaN** (Canonical correlation Analysis of Transcriptome and TF-gene regulatory Networks) identifies shared regulatory axes between transcription factor (TF)
 binding patterns and transcriptome profiles. The resulting Canonical Component
 (CC) scores are mapped to genomic SNP positions, producing annotation files
 suitable for stratified LD Score Regression (S-LDSC).
@@ -31,9 +30,9 @@ suitable for stratified LD Score Regression (S-LDSC).
 ## Workflow overview
 
 1. **Filter and normalise** RNA-seq count data
-2. **Run CCA** between a TF-gene binding matrix and the transcriptome
+2. **Run CCA** between a TF-gene regulatory Networks (TF-GRN) matrix and the transcriptome
 3. **Align CC scores to SNPs** using TF ChIP-seq peak coordinates
-4. **Extract top/bottom SNPs** and export for S-LDSC
+4. **make binary annotations** and export for S-LDSC
 
 # Quick start
 
@@ -45,8 +44,7 @@ library(CATaN)
 
 CATaN requires two matrices with shared gene identifiers as row names:
 
-- **TF-gene binding matrix**: binary matrix (gene × TF) indicating whether
-  each TF has a binding site near each gene.
+- **TF-GRN matrix**: a prepared matrix (gene × TF) indicating the regulatory relationships between TFs and their target genes made based on TF ChIP-seqs
 - **RNA-seq count matrix**: raw counts (gene × sample).
 
 ```{r download-data, eval=FALSE}
@@ -138,7 +136,7 @@ data files not included in this vignette.
 ## Download reference data
 
 ```{r download-peaks, eval=FALSE}
-## Download TF peak BED files from Zenodo (first time only, ~1 GB)
+## Download TF peak BED files from Zenodo (first time only)
 peak_dir <- download_peak_beds("~/catan_data/peaks")
 ```
 
@@ -173,10 +171,10 @@ annot <- align_cc_to_snps(
 )
 ```
 
-## Extract top/bottom SNPs and export
+## make CC annotations and export
 
 ```{r export-example, eval=FALSE}
-## Extract top and bottom 10% of SNPs by CC score
+## Score 1 for top and bottom 10% of SNPs by CC score, and score 0 for other SNPs
 annot <- extract_top_bottom_snps(annot, percentile = 0.1)
 
 ## Export as sLDSC-ready BED files
