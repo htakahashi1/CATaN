@@ -34,7 +34,7 @@ mats <- prepare_matrices(filtered, tf_matrix)
 # Step 2: Run CCA
 result <- run_cca(mats$tf, mats$expr, n_cc = 10L)
 
-# Step 3: Align to SNPs and export for S-LDSC
+# Step 3: Align to SNPs make CC annotations, and export for S-LDSC
 annot <- align_cc_to_snps(result, peak_dir, snp_gr)
 annot <- extract_top_bottom_snps(annot)
 export_for_sldsc(annot, "output/")
