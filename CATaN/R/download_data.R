@@ -4,11 +4,11 @@
 
 
 .CATAN_ZENODO_PEAK_URL <- paste0(
-    "https://zenodo.org/records/19507630/files/",
+    "https://zenodo.org/records/21206965/files/",
     "TF_ChIPseq_bed_hg19.tar.gz"
 )
 .CATAN_ZENODO_MATRIX_URL <- paste0(
-    "https://zenodo.org/records/19507630/files/",
+    "https://zenodo.org/records/21206965/files/",
     "TF_GRN_matrix.txt"
 )
 
