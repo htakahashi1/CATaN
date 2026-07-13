@@ -11,6 +11,9 @@
 #'   \code{counts}.
 #' @param norm_method Character. Normalisation method passed to
 #'   \code{edgeR::calcNormFactors()} (default \code{"TMM"}).
+#' @param strip_version Logical. If TRUE (default), remove Ensembl version
+#'   suffixes (e.g. ".7_3") from \code{tf_matrix} row names before matching,
+#'   so they align with unversioned gene IDs in \code{counts}.
 #' @param verbose Logical. Print summary messages (default TRUE).
 #'
 #' @return A named list with two elements:
@@ -41,6 +44,7 @@
 prepare_matrices <- function(counts,
                              tf_matrix,
                              norm_method = "TMM",
+                             strip_version = TRUE,
                              verbose     = TRUE) {
 
     ## Input validation
@@ -53,7 +57,19 @@ prepare_matrices <- function(counts,
     if (is.null(rownames(counts)) || is.null(rownames(tf_matrix))) {
         stop("Both counts and tf_matrix must have row names (gene identifiers)")
     }
-
+  
+  ## Strip Ensembl version suffix from TF matrix gene IDs
+  ## (e.g. "ENSG00000261067.7_3" -> "ENSG00000261067")
+  if (strip_version) {
+    old_ids <- rownames(tf_matrix)
+    new_ids <- sub("\\..*$", "", old_ids)
+    if (verbose && any(old_ids != new_ids)) {
+      message(sprintf("Stripped version suffix from %d TF gene IDs",
+                      sum(old_ids != new_ids)))
+    }
+    rownames(tf_matrix) <- new_ids
+  }
+  
     ## Remove duplicated genes from TF matrix
     dup_tf <- duplicated(rownames(tf_matrix)) |
               duplicated(rownames(tf_matrix), fromLast = TRUE)
