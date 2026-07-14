@@ -24,7 +24,7 @@ BiocManager::install("htakahashi1/CATaN")
 
 ## Tutorial
 
-See https://htakahashi1.github.io/CATaN/ for a full walkthrough.
+See [https://htakahashi1.github.io/CATaN/](https://htakahashi1.github.io/CATaN/articles/CATaN_tutorial.html) for a full walkthrough.
 
 ## Citation
 
