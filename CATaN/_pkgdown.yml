@@ -1,0 +1,9 @@
+url: https://htakahashi1.github.io/CATaN
+
+template:
+  bootstrap: 5
+
+navbar:
+  structure:
+    left:  [intro, reference, articles, news]
+    right: [search, github]

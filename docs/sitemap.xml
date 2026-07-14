@@ -1,0 +1,27 @@
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/articles/CATaN_tutorial.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/CATaN-accessors.html</loc></url>
+<url><loc>/reference/CATaN-package.html</loc></url>
+<url><loc>/reference/CATaNAnnotation-class.html</loc></url>
+<url><loc>/reference/CATaNResult-class.html</loc></url>
+<url><loc>/reference/align_cc_to_snps.html</loc></url>
+<url><loc>/reference/bim_to_granges.html</loc></url>
+<url><loc>/reference/catan_data_status.html</loc></url>
+<url><loc>/reference/download_peak_beds.html</loc></url>
+<url><loc>/reference/download_tf_matrix.html</loc></url>
+<url><loc>/reference/export_for_sldsc.html</loc></url>
+<url><loc>/reference/extract_top_bottom_snps.html</loc></url>
+<url><loc>/reference/filter_low_expression.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/plotCC.html</loc></url>
+<url><loc>/reference/prepare_matrices.html</loc></url>
+<url><loc>/reference/run_catan.html</loc></url>
+<url><loc>/reference/run_cca.html</loc></url>
+</urlset>
+
