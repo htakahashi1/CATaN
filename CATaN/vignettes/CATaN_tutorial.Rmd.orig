@@ -38,7 +38,7 @@ suitable for stratified LD Score Regression (S-LDSC).
 # Quick start
 
 ```{r install-deps, eval=FALSE}
-install.packages("BiocManager", "remotes")
+install.packages(c("BiocManager", "remotes"))
 BiocManager::install(c("GEOquery", "data.table"))
 
 ## CATaN itself (note: the package lives in the CATaN/ subdirectory)
@@ -185,9 +185,12 @@ annot <- align_cc_to_snps(
     peak_dir     = peak_dir,
     snp_gr       = snp_gr,
     chromosomes  = paste0("chr", 1:22),
-    BPPARAM      = MulticoreParam(4)  # 4 cores
+    BPPARAM      = SerialParam()
 )
 ```
+Note: `align_cc_to_snps()` loads all TF peaks into memory (~78 million peaks).
+Parallel workers may each hold a copy, so start with `SerialParam()` and
+increase workers only if memory allows.
 
 ## make CC annotations and export
 
@@ -226,7 +229,7 @@ result <- run_catan(
     n_hvg       = 10000L,
     percentile  = 0.1,
     output_dir  = "sldsc_output/",
-    BPPARAM     = MulticoreParam(4)
+    BPPARAM     = SerialParam()
 )
 ```
 
