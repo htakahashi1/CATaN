@@ -2,11 +2,6 @@
 
 This repository contains the code for Canonical correlation Analysis of Transcriptome and TF-gene regulatory Networks (CATaN).
 
-## Getting Started
-
-1. Download the data and code directories.
-2. Install the required packages.
-
 ## Usage
 
 If you would like to apply CATaN to bulk RNA-seq data, you can either use the CATaN R package or the Jupyter Notebook code in the [`bulk_RNA_seq`](./bulk_RNA_seq) directory. If you would like to apply it to single-cell RNA-seq data, use the code in the [`scRNA_seq`](./scRNA_seq) directory.
