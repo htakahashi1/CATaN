@@ -75,7 +75,8 @@ The raw count matrix is retrieved from GEO as a supplementary file.
 
 ``` r
 supp     <- GEOquery::getGEOSuppFiles("GSE335951", baseDir = tempdir())
-geo_file <- rownames(supp)[1]
+files    <- rownames(supp)
+geo_file <- grep("raw_counts", files, value = TRUE)[1]
 
 count_dt <- fread(geo_file)
 counts   <- as.matrix(count_dt[, -1])
