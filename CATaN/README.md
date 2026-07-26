@@ -19,7 +19,7 @@ SNP positions to make binary annotations for stratified LD Score Regression
 ```r
 # Install development version from GitHub
 install.packages("BiocManager")
-BiocManager::install("htakahashi1/CATaN")
+BiocManager::install("htakahashi1/CATaN", subdir = "CATaN")
 ```
 
 ## Tutorial
