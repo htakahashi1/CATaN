@@ -28,6 +28,14 @@ suitable for stratified LD Score Regression (S-LDSC).
 
 # Quick start
 
+``` r
+## Dependencies used in this tutorial
+install.packages(c("BiocManager", "remotes"))
+BiocManager::install(c("GEOquery", "data.table"))
+
+## CATaN itself (note: the package lives in the CATaN/ subdirectory)
+BiocManager::install("htakahashi1/CATaN", subdir = "CATaN")
+```
 
 ``` r
 library(CATaN)
