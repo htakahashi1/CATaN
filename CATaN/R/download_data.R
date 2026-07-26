@@ -66,15 +66,19 @@ download_peak_beds <- function(dest_dir,
     utils::untar(archive_path, exdir = dest_dir)
 
     ## Verify
-    bed_files <- list.files(dest_dir, pattern = "\\.hg19\\.bed$")
+    bed_files <- list.files(dest_dir, pattern = "\\.hg19\\.bed$",
+                            recursive = TRUE, full.names = TRUE)
     if (length(bed_files) == 0) {
         warning("No .hg19.bed files found after extraction. ",
                 "Check archive contents.")
-    } else if (verbose) {
-        message(sprintf("  %d TF peak BED files available", length(bed_files)))
+      return(dest_dir)
+    } 
+    if (verbose) {
+      message(sprintf("  %d TF peak BED files available", length(bed_files)))
     }
-
-    dest_dir
+    
+    ## Return the directory that actually contains the BED files
+    unique(dirname(bed_files))[1]
 }
 
 
