@@ -12,7 +12,7 @@ Description: CATaN performs Canonical Correlation Analysis (CCA) between
     are then aligned to genomic SNP positions to make binary annotations for
     stratified LD Score Regression (S-LDSC). The package provides an end-to-end
     pipeline from raw count data to S-LDSC-ready annotation files.
-License: MIT+ file LICENSE
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 biocViews: Genetics, GeneRegulation, Transcription, SNP,
