@@ -38,7 +38,9 @@ Suggests:
     rmarkdown,
     BiocStyle,
     ggplot2,
-    SummarizedExperiment
+    SummarizedExperiment,
+    GEOquery,
+    data.table
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 URL: https://github.com/htakahashi1/CATaN
