@@ -146,7 +146,8 @@ GB).</p>
 file.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">supp</span>     <span class="op">&lt;-</span> <span class="fu">GEOquery</span><span class="fu">::</span><span class="fu"><a href="http://seandavi.github.io/GEOquery/reference/getGEOSuppFiles.html" class="external-link">getGEOSuppFiles</a></span><span class="op">(</span><span class="st">"GSE335951"</span>, baseDir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">geo_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">supp</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span><span class="va">files</span>    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">supp</span><span class="op">)</span></span>
+<span><span class="va">geo_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">"raw_counts"</span>, <span class="va">files</span>, value <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
 <span></span>
 <span><span class="va">count_dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">geo_file</span><span class="op">)</span></span>
 <span><span class="va">counts</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">count_dt</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
@@ -310,8 +311,12 @@ function converts a <code>.bim</code> file to <code>GRanges</code>:</p>
 <span>    peak_dir     <span class="op">=</span> <span class="va">peak_dir</span>,</span>
 <span>    snp_gr       <span class="op">=</span> <span class="va">snp_gr</span>,</span>
 <span>    chromosomes  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"chr"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">22</span><span class="op">)</span>,</span>
-<span>    BPPARAM      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocParallel/man/MulticoreParam-class.html" class="external-link">MulticoreParam</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span>  <span class="co"># 4 cores</span></span>
+<span>    BPPARAM      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocParallel/man/SerialParam-class.html" class="external-link">SerialParam</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
+<p>Note: <code><a href="../reference/align_cc_to_snps.html">align_cc_to_snps()</a></code> loads all TF peaks into memory
+(~78 million peaks). Parallel workers may each hold a copy, so start
+with <code><a href="https://rdrr.io/pkg/BiocParallel/man/SerialParam-class.html" class="external-link">SerialParam()</a></code> and increase workers only if memory
+allows.</p>
 </div>
 <div class="section level3">
 <h3 id="make-cc-annotations-and-export">make CC annotations and export<a class="anchor" aria-label="anchor" href="#make-cc-annotations-and-export"></a>
@@ -348,7 +353,7 @@ pipeline:</p>
 <span>    n_hvg       <span class="op">=</span> <span class="fl">10000L</span>,</span>
 <span>    percentile  <span class="op">=</span> <span class="fl">0.1</span>,</span>
 <span>    output_dir  <span class="op">=</span> <span class="st">"sldsc_output/"</span>,</span>
-<span>    BPPARAM     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocParallel/man/MulticoreParam-class.html" class="external-link">MulticoreParam</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span></span>
+<span>    BPPARAM     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocParallel/man/SerialParam-class.html" class="external-link">SerialParam</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
