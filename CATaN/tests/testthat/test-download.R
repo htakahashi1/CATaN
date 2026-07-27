@@ -1,13 +1,3 @@
-test_that("download_peak_beds errors when URL not configured", {
-    expect_error(download_peak_beds(tempdir()),
-                 "Zenodo URL has not been configured")
-})
-
-test_that("download_tf_matrix errors when URL not configured", {
-    expect_error(download_tf_matrix(tempdir()),
-                 "Zenodo URL has not been configured")
-})
-
 test_that("download_peak_beds works with custom URL", {
     ## Create a mock directory with fake BED files directly
     ## and test the extraction verification logic

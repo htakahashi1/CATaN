@@ -50,7 +50,7 @@
 #' colnames(expr_mat) <- paste0("sample", seq_len(nsamp))
 #' res <- run_cca(tf_mat, expr_mat, n_cc = 5L, n_hvg = 100L)
 #'
-#' @importFrom stats var cor
+#' @importFrom stats var cor sd
 #' @importFrom methods new
 #' @importFrom S4Vectors DataFrame
 #' @export
@@ -181,13 +181,13 @@ run_cca <- function(tf_matrix,
     v <- svd_res$v[, seq_len(n_cc), drop = FALSE]
     d <- svd_res$d
 
-    ## Build TF weights DataFrame
+    ## Build TF sample loading DataFrame
     cc_names <- paste0("CC", seq_len(n_cc), "_rotation")
     tf_sample_loading <- S4Vectors::DataFrame(u)
     colnames(tf_sample_loading) <- cc_names
     rownames(tf_sample_loading) <- rownames(scaled_X)
 
-    ## Build sample weights DataFrame
+    ## Build transcriptome sample loading DataFrame
     transcriptome_sample_loading <- S4Vectors::DataFrame(v)
     colnames(transcriptome_sample_loading) <- cc_names
     rownames(transcriptome_sample_loading) <- rownames(scaled_Y)

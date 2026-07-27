@@ -8,6 +8,9 @@
 \usage{
 \S4method{show}{CATaNAnnotation}(object)
 }
+\arguments{
+\item{object}{A \code{CATaNAnnotation} object.}
+}
 \value{
 Prints a summary of the object to the console
 (invisibly returns NULL).

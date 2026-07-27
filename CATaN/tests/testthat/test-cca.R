@@ -73,8 +73,8 @@ test_that("run_cca produces valid CATaNResult", {
 
     ## Check slots
     expect_equal(res@n_cc, 5L)
-    expect_equal(ncol(res@tf_weights), 5)
-    expect_equal(ncol(res@sample_weights), 5)
+    expect_equal(ncol(tfsampleLoading(res)), 5)
+    expect_equal(ncol(trasampleLoading(res)), 5)
     expect_true(length(res@hvg) > 0)
 
     ## Check SVD components
@@ -172,9 +172,9 @@ test_that("accessors work on CATaNResult", {
 
     res <- run_cca(tf_mat, expr_mat, n_cc = 3L, n_hvg = 50L, verbose = FALSE)
 
-    expect_s4_class(tfWeights(res), "DataFrame")
-    expect_s4_class(sampleWeights(res), "DataFrame")
+    expect_s4_class(tfsampleLoading(res), "DataFrame")
+    expect_s4_class(trasampleLoading(res), "DataFrame")
     expect_s4_class(ccParameters(res), "DataFrame")
-    expect_equal(ncol(tfWeights(res)), 3)
-    expect_equal(ncol(sampleWeights(res)), 3)
+    expect_equal(ncol(tfsampleLoading(res)), 3)
+    expect_equal(ncol(trasampleLoading(res)), 3)
 })

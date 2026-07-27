@@ -10,6 +10,7 @@ run_catan(
   peak_dir = NULL,
   snp_gr,
   sample_metadata = NULL,
+  chromosomes = paste0("chr", 1:22),
   n_cc = 10L,
   n_hvg = 10000L,
   percentile = 0.1,
@@ -31,6 +32,9 @@ SummarizedExperiment.}
 \item{snp_gr}{GRanges of target SNP positions.}
 
 \item{sample_metadata}{data.frame of sample annotations (optional).}
+
+\item{chromosomes}{Character vector of chromosome names to process
+(default \code{paste0("chr", 1:22)}).}
 
 \item{n_cc}{Integer. Number of CCs (default 10L).}
 
@@ -79,11 +83,13 @@ for (t in colnames(tf)) {
 # Create mock SNPs
 library(GenomicRanges)
 snps <- GRanges("chr1",
-    IRanges::IRanges(c(150, 550, 9999), width = 1))
+    IRanges::IRanges(c(seq(100, 200, by = 4),
+                       seq(500, 600, by = 4)), width = 1))
 
 result <- run_catan(cts, tf, peak_dir = peak_dir,
     snp_gr = snps, n_cc = 2L, n_hvg = 50L,
+    chromosomes = "chr1",
     BPPARAM = BiocParallel::SerialParam(),
     verbose = FALSE)
-
+result
 }

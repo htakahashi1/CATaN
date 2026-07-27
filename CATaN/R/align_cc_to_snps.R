@@ -50,7 +50,8 @@
 #' # Create mock SNPs
 #' library(GenomicRanges)
 #' snps <- GRanges("chr1",
-#'     IRanges::IRanges(c(150, 550, 9999), width = 1))
+#'     IRanges::IRanges(c(seq(100, 200, by = 4),
+#'                        seq(500, 600, by = 4)), width = 1))
 #' annot <- align_cc_to_snps(res, peak_dir, snps,
 #'     chromosomes = "chr1",
 #'     BPPARAM = BiocParallel::SerialParam(),

@@ -8,6 +8,9 @@
 \usage{
 \S4method{show}{CATaNResult}(object)
 }
+\arguments{
+\item{object}{A \code{CATaNResult} object.}
+}
 \value{
 Prints a summary of the object to the console
 (invisibly returns NULL).

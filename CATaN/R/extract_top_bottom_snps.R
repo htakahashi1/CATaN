@@ -59,7 +59,13 @@ extract_top_bottom_snps <- function(annotation, percentile = 0.1) {
             bottom_list[[cc_name]] <- GenomicRanges::GRanges()
             next
         }
-
+        
+        ## Guard: too few SNPs for the requested percentile
+        if (n < as.integer(1 / percentile)) {
+          stop("Too few SNPs (", n, ") for percentile = ", percentile,
+               ". Need at least ", as.integer(1 / percentile), " SNPs.")
+        }
+        
         ## Number of SNPs in each tail (integer division, matching original)
         n_tail <- n %/% as.integer(1 / percentile)
 

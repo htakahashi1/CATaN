@@ -33,7 +33,7 @@ to \code{dest_dir}, which can then be passed to
 \code{\link{align_cc_to_snps}} as the \code{peak_dir} argument.
 }
 \examples{
-\donttest{
+\dontrun{
 peak_dir <- download_peak_beds("~/catan_data/peaks")
 }
 

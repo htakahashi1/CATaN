@@ -4,7 +4,13 @@
 \alias{prepare_matrices}
 \title{Prepare TF and transcriptome matrices for CCA}
 \usage{
-prepare_matrices(counts, tf_matrix, norm_method = "TMM", verbose = TRUE)
+prepare_matrices(
+  counts,
+  tf_matrix,
+  norm_method = "TMM",
+  strip_version = TRUE,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{counts}{A numeric matrix of filtered raw counts (genes x samples),
@@ -16,6 +22,10 @@ typically the output of \code{\link{filter_low_expression}}.}
 
 \item{norm_method}{Character. Normalisation method passed to
 \code{edgeR::calcNormFactors()} (default \code{"TMM"}).}
+
+\item{strip_version}{Logical. If TRUE (default), remove Ensembl version
+suffixes (e.g. ".7_3") from \code{tf_matrix} row names before matching,
+so they align with unversioned gene IDs in \code{counts}.}
 
 \item{verbose}{Logical. Print summary messages (default TRUE).}
 }

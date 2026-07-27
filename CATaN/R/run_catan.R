@@ -10,6 +10,8 @@
 #'   \code{\link{download_peak_beds}} is called automatically.
 #' @param snp_gr GRanges of target SNP positions.
 #' @param sample_metadata data.frame of sample annotations (optional).
+#' @param chromosomes Character vector of chromosome names to process
+#'   (default \code{paste0("chr", 1:22)}).
 #' @param n_cc Integer. Number of CCs (default 10L).
 #' @param n_hvg Integer. Number of HVGs (default 10000L).
 #' @param percentile Numeric. Top/bottom fraction (default 0.1).
@@ -46,13 +48,15 @@
 #' # Create mock SNPs
 #' library(GenomicRanges)
 #' snps <- GRanges("chr1",
-#'     IRanges::IRanges(c(150, 550, 9999), width = 1))
+#'     IRanges::IRanges(c(seq(100, 200, by = 4),
+#'                        seq(500, 600, by = 4)), width = 1))
 #'
 #' result <- run_catan(cts, tf, peak_dir = peak_dir,
 #'     snp_gr = snps, n_cc = 2L, n_hvg = 50L,
+#'     chromosomes = "chr1",
 #'     BPPARAM = BiocParallel::SerialParam(),
 #'     verbose = FALSE)
-#'
+#' result
 #' @export
 run_catan <- function(counts,
                       tf_matrix,
@@ -96,7 +100,7 @@ run_catan <- function(counts,
         catan_result = cca_res,
         peak_dir     = peak_dir,
         snp_gr       = snp_gr,
-        chromosomes  = paste0("chr", 1:22),
+        chromosomes  = chromosomes,
         population   = population,
         BPPARAM      = BPPARAM,
         verbose      = verbose

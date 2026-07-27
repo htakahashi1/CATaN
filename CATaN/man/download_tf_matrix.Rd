@@ -24,7 +24,7 @@ Character. Path to the downloaded (uncompressed) matrix file.
 Downloads the TF-gene binding association matrix used in the CATaN paper.
 }
 \examples{
-\donttest{
+\dontrun{
 matrix_file <- download_tf_matrix("~/catan_data")
 tf_mat <- read.table(matrix_file, header = TRUE, row.names = 1)
 }

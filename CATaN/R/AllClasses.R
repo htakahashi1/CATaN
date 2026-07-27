@@ -148,6 +148,7 @@ setClass("CATaNAnnotation",
 ## ---- Show methods ----
 
 #' @rdname CATaNResult-class
+#' @param object A \code{CATaNResult} object.
 #' @importFrom methods show
 #' @return Prints a summary of the object to the console
 #'   (invisibly returns NULL).
@@ -168,6 +169,7 @@ setMethod("show", "CATaNResult", function(object) {
 })
 
 #' @rdname CATaNAnnotation-class
+#' @param object A \code{CATaNAnnotation} object.
 #' @return Prints a summary of the object to the console
 #'   (invisibly returns NULL).
 #' @examples

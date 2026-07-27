@@ -36,7 +36,7 @@
 #' \code{\link{align_cc_to_snps}} as the \code{peak_dir} argument.
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' peak_dir <- download_peak_beds("~/catan_data/peaks")
 #' }
 #'
@@ -96,7 +96,7 @@ download_peak_beds <- function(dest_dir,
 #' @return Character. Path to the downloaded (uncompressed) matrix file.
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' matrix_file <- download_tf_matrix("~/catan_data")
 #' tf_mat <- read.table(matrix_file, header = TRUE, row.names = 1)
 #' }
